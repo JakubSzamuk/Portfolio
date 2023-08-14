@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+.notWhite {
+  background-color: rgb(254, 254, 254);
+}
+html, body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #1a191a;
+  overflow-x: hidden;
+}
+.displayFont {
+  font-family: 'Bungee', cursive;
+}
+.contrast {
+  background-color: #281f28;
+}
+.serifFont {
+  font-family: 'Roboto Slab', serif;
+}
+.textCol {
+  color: #ddd;
+}
