@@ -3,29 +3,72 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import ProjectPost from './ProjectPost'
 import axios from 'axios'
+import Service from './Service'
+import { StringMappingType } from 'typescript'
+
+type Post = {
+  id: string,
+  githubLink: string,
+  Title: string,
+  mobileApp: boolean,
+  date: string,
+  image: string,
+  hostingLink: string,
+  description: string,
+}
+type Service = {
+  title: string,
+  description: string,
+  icon: string
+}
 
 export default function Home() {
 
-  const [currentPosts, setCurrentPosts] = useState()  
+  const [currentPosts, setCurrentPosts] = useState<Post[]>()  
+  const [services, setServices] = useState<Service[]>()
 
   const fetchData = async () => {
     axios.get("/api/projects").then((res) => {
       setCurrentPosts(res.data)
     })
+    axios.get("/api/services").then((res) => {
+      setServices(res.data)
+    })
   }
-  console.log(currentPosts)
+
+  console.log(services)
   useEffect(() => {
     fetchData()
   }, [])
   
+  // let services = [
+  //   {
+  //     title: "Web Developement",
+  //     description: "I can create a perfect, performant website that is fully accessible with full SEO for maximum potential and a content-management system for an affordable price!",
+  //     icon: "browser",
+  //   },
+  //   {
+  //     title: "App developement",
+  //     description: "I can create a beautiful, fast app for android and ios packed full of features to your specification quickly!",
+  //     icon: "app",
+  //   },
+  //   {
+  //     title: "Hosting",
+  //     description: "I can help you setup hosting with HTTPS and a domain for your website or include it with a website I created for you!",
+  //     icon: "hosting",
+  //   },
+  //   {
+  //     title: "",
+  //     description: "",
+  //     icon: "",
+  //   },
+  // ]
+
   return (
     <div className='w-screen flex flex-col md:items-center'>
-
-
-
       <div className='md:w-[87vw] 2xl:w-[60vw] shadow-xl mt-16 md:mt-32 items-center flex flex-col lg:p-16'>
         <div className='relative w-[82vw] lg:w-[80vw] xl:w-[50vw]'>
-          <h1 className='textCol displayFont text-[8vw] sm:text-4xl md:text-6xl sm:w-full md:w-[48vw]'>Web <br className='sm:hidden' /> Design, Developement, implementation.</h1>
+          <h1 className='textCol displayFont text-[8vw] sm:text-4xl md:text-6xl sm:w-full md:w-[48vw]'>Web <br className='sm:hidden' /> Design, Developement, <span className='accentCol'>implementation.</span></h1>
           <div className='flex flex-col sm:flex-row w-full items-center mt-2'>
             <p className='textCol serifFont w-full sm:w-[65%] md:w-[85%]'>Hello, My name is Jakub Szamuk, I am a full stack developer studying in college.</p>
             <div className='textCol flex-row flex border-b-[1px] w-[20%] sm:w-[15%] md:w-[15%] mt-4 sm:mt-0 justify-center items-center pr-1 static sm:absolute right-0'>
@@ -38,9 +81,14 @@ export default function Home() {
             <a className='textCol text-4xl' href='https://stackoverflow.com/users/21986240/jakub-szamuk' target='_blank'><ion-icon name="logo-stackoverflow"></ion-icon></a>
           </div>
           <div className='mt-2'>
-            <p className='textCol displayFont text-3xl'>About me</p>
+            <h2 className='textCol displayFont text-3xl'>About me:</h2>
             <p className='textCol serifFont mt-4 text-xl'>I am a young developer and engineer studying at college, I have worked a lot with javascript frameworks like react, react native and nextjs. I love creating websites (and drinking coffee ☕!), see my work below!</p>
-            <p className='textCol displayFont text-3xl mt-8'>My skillset:</p>
+            <h3 className='textCol displayFont mt-8 text-3xl'>Services I offer:</h3>
+            <div className='grid grid-flow-row grid-cols-2 grid-rows-2 mt-4'>
+              {services ? services.map((service, index) => (<Service key={index} {...services[index]}/>)) : null}
+            </div>
+            <p className='displayFont textCol text-xl'>If you are interested be sure to contact me!</p>
+            <h4 className='textCol displayFont text-3xl mt-8'>My skillset:</h4>
             <ul className='pl-4 textCol grid grid-rows-6  sm:grid-rows-3 grid-flow-col sm:h-[10vh] sm:max-h-[10vh] list-disc serifFont text-xl'>
               <li>React</li>
               <li>React-Native</li>
@@ -53,11 +101,11 @@ export default function Home() {
               <li>Vite</li>
             </ul>
 
-            <p className='textCol displayFont text-3xl mt-8'>
+            <h5 className='textCol displayFont text-3xl mt-8'>
               My Projects:
-            </p>
+            </h5>
             <div className='grid mt-8 gap-2'>
-              {currentPosts ? currentPosts.map((project: object) => <ProjectPost githublink={project.githubLink} id={project.id} title={project.Title} description={project.description} mobileApp={project.mobileApp} hostingLink={project.hostingLink} date={project.date} image={project.image} />) : null}
+              {currentPosts ? currentPosts.map((project) => <ProjectPost githublink={project.githubLink} id={project.id} title={project.Title} description={project.description} mobileApp={project.mobileApp} hostingLink={project.hostingLink} date={project.date} image={project.image} />) : null}
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.0.10",
     "@types/node": "20.4.8",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
@@ -16,6 +17,7 @@
     "axios": "^1.4.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
+    "framer-motion": "^10.15.2",
     "next": "13.4.13",
     "pocketbase": "^0.16.0",
     "postcss": "8.4.27",

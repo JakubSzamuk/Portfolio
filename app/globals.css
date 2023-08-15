@@ -14,15 +14,20 @@
 }
 html, body {
   width: 100vw;
-  height: 100vh;
   background-color: #1a191a;
   overflow-x: hidden;
+}
+.accentCol {
+  color: #4287f5;
 }
 .displayFont {
   font-family: 'Bungee', cursive;
 }
 .contrast {
   background-color: #281f28;
+}
+.slightContrast {
+  background-color: #171717;
 }
 .serifFont {
   font-family: 'Roboto Slab', serif;
