@@ -3,7 +3,6 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 
 export default function ProjectPost(props: any) {
-  console.log(props)
   return (
     <a className="hover:shadow-2xl shadow-2xl xl:shadow-none w-[80vw] xl:w-[50vw] 2xl:w-[84%] p-8 hover:cursor-pointer flex flex-col 2xl:flex-row rounded-3xl transition-all" aria-label="Link to the websites Hosting" href={props.hostingLink}> 
       <div className={`flex rounded-2xl justify-center w-full overflow-clip ${props.mobileApp ? " min-w-min 2xl:w-[44rem]" : "2xl:w-[44rem]"}`}>
