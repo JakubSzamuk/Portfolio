@@ -5,6 +5,7 @@ import ProjectPost from './ProjectPost'
 import axios from 'axios'
 import Service from './Service'
 import { StringMappingType } from 'typescript'
+import { GetStaticProps } from 'next'
 
 type Post = {
   id: string,
@@ -15,17 +16,34 @@ type Post = {
   image: string,
   hostingLink: string,
   description: string,
+  altText: string,
 }
 type Service = {
   title: string,
   description: string,
   icon: string
 }
+type propArr = {
+  posts: Post[],
+  service: Service[]
+}
 
-export default function Home() {
+export const GetStaticProps: GetStaticProps = async () => {
+  let postsTemp: Post[]
+  let servicesTemp: Service[]
+  axios.get("/api/projects").then((res) => {
+    postsTemp = res.data
+  })
+  axios.get("/api/services").then((res) => {
+    servicesTemp = res.data
+    return { props: { posts: postsTemp, service: servicesTemp } }
+  })
+}
 
-  const [currentPosts, setCurrentPosts] = useState<Post[]>()  
-  const [services, setServices] = useState<Service[]>()
+export default function Home(props: propArr) {
+
+  const [currentPosts, setCurrentPosts] = useState<Post[]>(props.posts)  
+  const [services, setServices] = useState<Service[]>(props.service)
 
   const fetchData = async () => {
     axios.get("/api/projects").then((res) => {
@@ -36,33 +54,10 @@ export default function Home() {
     })
   }
 
-  console.log(services)
   useEffect(() => {
     fetchData()
   }, [])
   
-  // let services = [
-  //   {
-  //     title: "Web Developement",
-  //     description: "I can create a perfect, performant website that is fully accessible with full SEO for maximum potential and a content-management system for an affordable price!",
-  //     icon: "browser",
-  //   },
-  //   {
-  //     title: "App developement",
-  //     description: "I can create a beautiful, fast app for android and ios packed full of features to your specification quickly!",
-  //     icon: "app",
-  //   },
-  //   {
-  //     title: "Hosting",
-  //     description: "I can help you setup hosting with HTTPS and a domain for your website or include it with a website I created for you!",
-  //     icon: "hosting",
-  //   },
-  //   {
-  //     title: "",
-  //     description: "",
-  //     icon: "",
-  //   },
-  // ]
 
   return (
     <div className='w-screen flex flex-col md:items-center'>
@@ -77,8 +72,8 @@ export default function Home() {
             </div>
           </div>
           <div className='flex mt-2 w-full items-center'>
-            <a className='textCol text-4xl' href='https://github.com/JakubSzamuk' target='_blank'><ion-icon name="logo-github"></ion-icon></a>
-            <a className='textCol text-4xl' href='https://stackoverflow.com/users/21986240/jakub-szamuk' target='_blank'><ion-icon name="logo-stackoverflow"></ion-icon></a>
+            <a className='textCol text-4xl' href='https://github.com/JakubSzamuk' aria-label='Github Link' target='_blank'><ion-icon name="logo-github"></ion-icon></a>
+            <a className='textCol text-4xl' href='https://stackoverflow.com/users/21986240/jakub-szamuk' aria-label='Stack overflow Link' target='_blank'><ion-icon name="logo-stackoverflow"></ion-icon></a>
           </div>
           <div className='mt-2'>
             <h2 className='textCol displayFont text-3xl'>About me:</h2>
@@ -105,7 +100,7 @@ export default function Home() {
               My Projects:
             </h5>
             <div className='grid mt-8 gap-2'>
-              {currentPosts ? currentPosts.map((project) => <ProjectPost githublink={project.githubLink} id={project.id} title={project.Title} description={project.description} mobileApp={project.mobileApp} hostingLink={project.hostingLink} date={project.date} image={project.image} />) : null}
+              {currentPosts ? currentPosts.map((project, key) => <ProjectPost key={key} {...project} />) : null}
             </div>
             <h6 className='textCol displayFont text-3xl mt-8'>
               Contact me!
