@@ -6,6 +6,8 @@ import axios from 'axios'
 import Service from './Service'
 import { StringMappingType } from 'typescript'
 import { GetStaticProps } from 'next'
+import { MapPin } from '@phosphor-icons/react'
+
 
 type Post = {
   id: string,
@@ -67,7 +69,7 @@ export default function Home(props: propArr) {
           <div className='flex flex-col sm:flex-row w-full items-center mt-2'>
             <p className='textCol serifFont w-full sm:w-[65%] md:w-[85%]'>Hello, My name is Jakub Szamuk, I am a full stack developer studying in college.</p>
             <div className='textCol flex-row flex border-b-[1px] w-[20%] sm:w-[15%] md:w-[15%] mt-4 sm:mt-0 justify-center items-center pr-1 static sm:absolute right-0'>
-              <span className="material-symbols-outlined">location_on</span>
+              <MapPin size={22} color="#ddd" />
               <p>Leeds</p>
             </div>
           </div>
