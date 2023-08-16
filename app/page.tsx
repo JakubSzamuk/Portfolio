@@ -30,17 +30,17 @@ type propArr = {
   service: Service[]
 }
 
-export const GetStaticProps: GetStaticProps = async () => {
-  let postsTemp: Post[]
-  let servicesTemp: Service[]
-  axios.get("/api/projects").then((res) => {
-    postsTemp = res.data
-  })
-  axios.get("/api/services").then((res) => {
-    servicesTemp = res.data
-    return { props: { posts: postsTemp, service: servicesTemp } }
-  })
-}
+// export const GetStaticProps: GetStaticProps = async () => {
+//   let postsTemp: Post[]
+//   let servicesTemp: Service[]
+//   axios.get("/api/projects").then((res) => {
+//     postsTemp = res.data
+//   })
+//   axios.get("/api/services").then((res) => {
+//     servicesTemp = res.data
+//     return { props: { posts: postsTemp, service: servicesTemp } }
+//   })
+// }
 
 export default function Home(props: propArr) {
 
