@@ -112,14 +112,14 @@ export default function Home() {
             </h6>
             <p className='textCol mt-4 serifFont text-xl'>Interested in working with me?</p>
             <div className='flex flex-col md:flex-row justify-center gap-[8vh] mt-6'>
-              <div className='textCol serifFont text-[4.5vw] sm:text-xl bg-secondary rounded-lg p-8'>
+              <a href='mailto:lavaproofJakub1@gmail.com' className='textCol serifFont text-[4.5vw] sm:text-xl bg-secondary rounded-lg p-8'>
                 <p>Send me an email!</p>
-                <a className='displayFont w-full' href='mailto:lavaproofJakub1@gmail.com'>lavaproof<br className='visible sm:hidden' />Jakub1@gmail.com</a>
-              </div>
-              <div className='textCol serifFont text-xl bg-secondary rounded-lg p-8'>
+                <a className='displayFont w-full'>lavaproof<br className='visible sm:hidden' />Jakub1@gmail.com</a>
+              </a>
+              <a href='tel:07498714126' className='textCol serifFont text-xl bg-secondary rounded-lg p-8'>
                 <p>Or call me!</p>
                 <p className='displayFont'>07498714126</p>
-              </div>
+              </a>
             </div>
           </div>
         </div>
