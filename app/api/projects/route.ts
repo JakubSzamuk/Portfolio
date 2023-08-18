@@ -8,7 +8,7 @@ pb.autoCancellation(false);
 export const revalidate = 0
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   const resultList = await pb.collection('portfolioPosts').getFullList({
-    sort: '-created',
+    sort: 'created',
   });
 
   return NextResponse.json(resultList)
